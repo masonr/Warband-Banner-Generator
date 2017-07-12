@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Warband Banner Generator</title>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta charset="UTF-8">
+    <meta name="description" content="Generate Mount and Blade: Warband server banners">
+    <meta name="keywords" content="Mount and Blade,Warband,Server,Banner">
+    <meta name="author" content="Mason Rowe">
+    <link href="css.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="container">
+        <form action="" id="generate" method="post" name="generate">
+            <h1>Mount & Blade Warband Server Banner Generator</h1>
+            <h2>Enter the server information below!</h2>
+            <fieldset>
+                <input autofocus="" id="server_ip" placeholder="Server IP (i.e. 66.70.135.240)" required="" tabindex="1" type="text">
+            </fieldset>
+            <fieldset>
+                <input id="server_port" placeholder="Server Port (i.e. 7240)" required="" tabindex="2" type="text">
+            </fieldset>
+            <fieldset>
+                <select id="banner" name="banner">
+                    <option value="cannons">
+                        Civil War Cannons
+                    </option>
+                    <option value="civilwar_scene">
+                        Civil War Scene #1
+                    </option>
+                    <option value="civilwar_scene2">
+                        Civil War Scene #2
+                    </option>
+                    <option value="mnb_cavalry">
+                        Mount and Blade Cavalry
+                    </option>
+                    <option value="mnb_mounted">
+                        Mount and Blade Mounted Warrior
+                    </option>
+                    <option value="nw_borodino">
+                        Napoleonic Wars Scene #1
+                    </option>
+                    <option value="nw_scene">
+                        Napoleonic Wars Scene #2
+                    </option>
+                </select>
+            </fieldset>
+            <fieldset>
+                <input id="site_link" placeholder="(Optional) Link to website, starts with http://" tabindex="3" type="url">
+            </fieldset>
+            <fieldset>
+                <button id="submit" name="submit" onclick="return createBanner(); return false;" type="button">Submit</button>
+            </fieldset>
+            <fieldset>
+                <button id="clear" name="clear" onclick="return clearForm(); return false;" type="button">Clear</button>
+            </fieldset>
+            <fieldset>
+                <p>HTML Code</p>
+                <textarea id="html_code" onclick="this.select();" placeholder="HTML Code will populate here." readonly="readonly"></textarea>
+            </fieldset>
+            <fieldset>
+                <p>Forum (BB) / TeamSpeak Code</p>
+                <textarea id="forum_code" onclick="this.select();" placeholder="Forum (BB) Code will populate here." readonly="readonly"></textarea>
+            </fieldset>
+            <fieldset id="preview">
+                <p>Preview Image</p>
+                <p style="font-size: 10px;line-height: 10px;padding-bottom: 5px;">(May take a few seconds to load. Max connection time of 5 seconds to reach server before returning error.)</p><img id="preview_image" src="images/preview.png">
+            </fieldset>
+            <fieldset>
+                <p>Direct Image Link</p><input id="image_link" onclick="this.select();" placeholder="Image link will populate here." readonly="readonly" type="text">
+            </fieldset>
+            <p style="text-align: center;">Created by Mason Rowe (Hadrian)</p>
+            <p style="text-align: center;">Source code: <a href="https://github.com/masonr/Warband-Banner-Generator" target="_blank">github.com/masonr/Warband-Banner-Generator</a></p>
+        </form>
+    </div>
+    <script>
+    function createBanner() {
+       ip = document.getElementById('server_ip').value;
+       port = Number(document.getElementById('server_port').value);
+       banner = document.getElementById('banner').value;
+       if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ip)) {  
+           if (Number.isInteger(port) && port > 0 && port < 65535) {
+               link = document.getElementById('site_link').value;
+               if (link == "") {
+                   // html code block
+                   document.getElementById("html_code").value = '<img src="http://www.warbandbanner.cf/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner + '">';
+
+                   // forum bb code block
+                   document.getElementById("forum_code").value = '[img]' + 'http://www.warbandbanner.cf/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner + '[/img]';
+
+                   
+               } else {
+                   // html code block
+                   document.getElementById("html_code").value = '<a href="' + link + '"><img src="http://www.warbandbanner.cf/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner + '"><\/a>';
+
+                   // forum bb code block
+                   document.getElementById("forum_code").value = '[url=' + link + '][img]' + 'http://www.warbandbanner.cf/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner + '[/img][/url]';
+                   
+               }
+               // preview image
+               document.getElementById("preview_image").src = 'http://www.warbandbanner.cf/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner;
+
+               // direct image link
+               document.getElementById("image_link").value = 'http://www.warbandbanner.cf/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner;
+
+           } else {
+               alert("Port Number is invalid! Try again.");
+           }
+       } else {
+           alert("IP Address is invalid! Try again.");
+       }  
+    }
+    function clearForm() {
+       document.getElementById("server_ip").value = "";
+       document.getElementById("server_port").value = "";
+       document.getElementById("site_link").value = "";
+       document.getElementById("html_code").value = "";
+       document.getElementById("forum_code").value = "";
+       document.getElementById("preview_image").src = "images/preview.png";
+       document.getElementById("image_link").value = "";
+    }
+    </script> 
+</body>
+</html>
