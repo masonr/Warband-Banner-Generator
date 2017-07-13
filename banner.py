@@ -2,6 +2,7 @@
 import os;
 import sys;
 import bleach;
+import uuid;
 
 import cgi;
 import cgitb;
@@ -26,11 +27,11 @@ banners = {
 	'mnb_mounted': 'mounted.png'
 };
 images_directory = "./images/";
+img_name = str(uuid.uuid1()) + ".png";
 
 arguments = cgi.FieldStorage();
 ip = bleach.clean(arguments["ip"].value);
 port = bleach.clean(arguments["port"].value);
-
 banner = banners[bleach.clean(arguments["banner"].value)];
 
 img = Image.open(os.path.join(images_directory, banner)).convert('RGBA');
@@ -49,9 +50,9 @@ except:
 	draw.text((249-(w/2),3),error,(0,0,0),font=font2);
 	draw.text((251-(w/2),3),error,(0,0,0),font=font2);
 	draw.text((250-(w/2),2),error,(255,0,0),font=font2);		
-	img.save('banner-mod.png', 'png');
-	print(file('banner-mod.png', 'rb').read());
-	os.remove('banner-mod.png');
+	img.save(img_name, 'png');
+	print(file(img_name, 'rb').read());
+	os.remove(img_name);
 	sys.exit(0);
 
 stats = f.read();
@@ -125,6 +126,6 @@ draw.text((490-w, 79),players,(255,255,255),font=font2);
 # Draw Lock/Unlocked Symbol
 img.paste(lock, (474,4));
 
-img.save('banner-mod.png', 'png');
-print(file('banner-mod.png', 'rb').read());
-os.remove('banner-mod.png');
+img.save(img_name, 'png');
+print(file(img_name, 'rb').read());
+os.remove(img_name);
