@@ -2,15 +2,12 @@
 import os;
 import sys;
 import bleach;
-import uuid;
-
+import StringIO;
 import cgi;
 import cgitb;
 cgitb.enable();
-
 import urllib2;
 import xml.etree.ElementTree as ET;
-
 from PIL import Image;
 from PIL import ImageFont;
 from PIL import ImageDraw;
@@ -27,7 +24,7 @@ banners = {
 	'mnb_mounted': 'mounted.png'
 };
 images_directory = "./images/";
-img_name = str(uuid.uuid1()) + ".png";
+buff = StringIO.StringIO();
 
 arguments = cgi.FieldStorage();
 ip = bleach.clean(arguments["ip"].value);
@@ -50,9 +47,9 @@ except:
 	draw.text((249-(w/2),3),error,(0,0,0),font=font2);
 	draw.text((251-(w/2),3),error,(0,0,0),font=font2);
 	draw.text((250-(w/2),2),error,(255,0,0),font=font2);		
-	img.save(img_name, 'png');
-	print(file(img_name, 'rb').read());
-	os.remove(img_name);
+	img.save(buff, 'png');
+	print(buff.getvalue());
+	buff.close();
 	sys.exit(0);
 
 stats = f.read();
@@ -126,6 +123,7 @@ draw.text((490-w, 79),players,(255,255,255),font=font2);
 # Draw Lock/Unlocked Symbol
 img.paste(lock, (474,4));
 
-img.save(img_name, 'png');
-print(file(img_name, 'rb').read());
-os.remove(img_name);
+# Output final image
+img.save(buff, 'png');
+print(buff.getvalue());
+buff.close();
