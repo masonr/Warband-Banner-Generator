@@ -1,5 +1,5 @@
 # Warband Banner Generator
-http://www.warbandbanner.cf
+https://warbandbanner.masonrowe.com/
 
 A simple banner generator based on python for Mount and Blade: Warband servers.
 
