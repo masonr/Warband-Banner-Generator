@@ -15,12 +15,13 @@
             <h1>Mount & Blade Warband Server Banner Generator</h1>
             <h2>Enter the server information below!</h2>
             <fieldset>
-                <input autofocus="" id="server_ip" placeholder="Server IP (i.e. 66.70.135.240)" required="" tabindex="1" type="text">
+                <input autofocus="" id="server_ip" placeholder="Server IP (i.e. 108.61.57.155)" required="" tabindex="1" type="text">
             </fieldset>
             <fieldset>
                 <input id="server_port" placeholder="Server Port (i.e. 7240)" required="" tabindex="2" type="text">
             </fieldset>
             <fieldset>
+                <p>Background Image <a href="images.html" style="float:right;">(View all background options)</a></p>
                 <select id="banner" name="banner">
                     <option value="cannons">
                         Civil War Cannons
@@ -31,8 +32,14 @@
                     <option value="civilwar_scene2">
                         Civil War Scene #2
                     </option>
+                    <option value="mnb_castle">
+                        Mount and Blade Castle
+                    </option>
                     <option value="mnb_cavalry">
                         Mount and Blade Cavalry
+                    </option>
+                    <option value="mnb_knights">
+                        Mount and Blade Knights
                     </option>
                     <option value="mnb_mounted">
                         Mount and Blade Mounted Warrior
@@ -83,25 +90,25 @@
                link = document.getElementById('site_link').value;
                if (link == "") {
                    // html code block
-                   document.getElementById("html_code").value = '<img src="http://www.warbandbanner.cf/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner + '">';
+                   document.getElementById("html_code").value = '<img src="https://warbandbanner.masonrowe.com/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner + '">';
 
                    // forum bb code block
-                   document.getElementById("forum_code").value = '[img]' + 'http://www.warbandbanner.cf/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner + '[/img]';
+                   document.getElementById("forum_code").value = '[img]' + 'https://warbandbanner.masonrowe.com/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner + '[/img]';
 
                    
                } else {
                    // html code block
-                   document.getElementById("html_code").value = '<a href="' + link + '"><img src="http://www.warbandbanner.cf/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner + '"><\/a>';
+                   document.getElementById("html_code").value = '<a href="' + link + '"><img src="https://warbandbanner.masonrowe.com/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner + '"><\/a>';
 
                    // forum bb code block
-                   document.getElementById("forum_code").value = '[url=' + link + '][img]' + 'http://www.warbandbanner.cf/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner + '[/img][/url]';
+                   document.getElementById("forum_code").value = '[url=' + link + '][img]' + 'https://warbandbanner.masonrowe.com/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner + '[/img][/url]';
                    
                }
                // preview image
-               document.getElementById("preview_image").src = 'http://www.warbandbanner.cf/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner;
+               document.getElementById("preview_image").src = 'https://warbandbanner.masonrowe.com/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner;
 
                // direct image link
-               document.getElementById("image_link").value = 'http://www.warbandbanner.cf/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner;
+               document.getElementById("image_link").value = 'https://warbandbanner.masonrowe.com/banner.py?ip=' + ip + '&port=' + port + '&banner=' + banner;
 
            } else {
                alert("Port Number is invalid! Try again.");

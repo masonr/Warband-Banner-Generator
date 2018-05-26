@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 import os;
 import sys;
 import bleach;
@@ -18,10 +18,12 @@ banners = {
 	'cannons': 'cannons.png',
 	'civilwar_scene': 'civil_war_scene.png',
 	'civilwar_scene2': 'picketts_charge.png',
-	'nw_borodino': 'borodino.png',
-	'nw_scene': 'nw_french.png',
+	'mnb_castle': 'wb_castle.png',
 	'mnb_cavalry': 'cavalry.png',
-	'mnb_mounted': 'mounted.png'
+	'mnb_knights': 'wb_knights.png',
+	'mnb_mounted': 'mounted.png',
+	'nw_borodino': 'borodino.png',
+	'nw_scene': 'nw_french.png'
 };
 images_directory = "./images/";
 buff = StringIO.StringIO();
@@ -33,8 +35,8 @@ banner = banners[bleach.clean(arguments["banner"].value)];
 
 img = Image.open(os.path.join(images_directory, banner)).convert('RGBA');
 draw = ImageDraw.Draw(img);
-font1 = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 14);
-font2 = ImageFont.truetype('Pillow/Tests/fonts/DejaVuSans.ttf', 18);
+font1 = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 14);
+font2 = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 18);
 
 link = "http://" + ip + ":" + port;
 try: 
